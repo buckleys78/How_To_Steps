@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>List Item:</strong>
+  <%= List.find(@step.list_id).title %>
+</p>
+
+<p>
   <strong>Number:</strong>
   <%= @step.number %>
 </p>
@@ -22,8 +27,8 @@
 
 <p>
   <strong>List:</strong>
-  <%= @step.list %>
+  <%= @step.list_id %>
 </p>
 
-<%= link_to 'Edit', edit_step_path(@step) %> |
-<%= link_to 'Back', steps_path %>
+<%= link_to 'Edit', edit_list_step_path %> |
+<%= link_to 'Back', list_steps_path %>

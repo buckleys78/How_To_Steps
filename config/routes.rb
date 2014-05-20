@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  resources :steps
-
-  resources :lists
-
-  root to: 'lists#index'
+  root 'lists#index'
+  resources :lists do
+    resources :steps
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -45,9 +44,9 @@ Rails.application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  resources :lists do
-    resources :steps, shallow: true
-  end
+  # resources :lists do
+  #   resources :steps, shallow: true
+  # end
 
   # Example resource route with concerns:
   #   concern :toggleable do
@@ -55,10 +54,10 @@ Rails.application.routes.draw do
   #   end
   #   resources :posts, concerns: :toggleable
   #   resources :photos, concerns: :toggleable
-  concern :stepable do
-    resources :steps
-  end
-  resources :lists, concerns: :stepable
+  # concern :stepable do
+  #   resources :steps
+  # end
+  # resources :lists, concerns: :stepable
   # Example resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController

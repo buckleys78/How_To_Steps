@@ -1,24 +1,27 @@
 class StepsController < ApplicationController
-  attr_accessor :list, :steps, :step
 
   before_action :load_list
 
   # GET /steps
   # GET /steps.json
   def index
-    steps = list.steps.all
+    @steps = @list.steps.all
   end
 
   # GET /steps/1
   # GET /steps/1.json
   def show
     @steps = Step.find(params[:id])
-    step = list.steps.find(params[:id])
+    @step = @list.steps.find(params[:id])
   end
 
   # GET /steps/new
   def new
-    step = list.steps.new
+    @step = @list.steps.new
+
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /steps/1/edit
@@ -28,11 +31,11 @@ class StepsController < ApplicationController
   # POST /steps
   # POST /steps.json
   def create
-    @step = Step.new(step_params)
+    @step = @list.steps.new(step_params)
 
     respond_to do |format|
       if @step.save
-        format.html { redirect_to @step, notice: 'Step was successfully created.' }
+        format.html { redirect_to [@list, @step], notice: 'Step was successfully created.' }
         format.json { render :show, status: :created, location: @step }
       else
         format.html { render :new }
@@ -44,6 +47,7 @@ class StepsController < ApplicationController
   # PATCH/PUT /steps/1
   # PATCH/PUT /steps/1.json
   def update
+    # @step = @list.steps.update(step_params)
     respond_to do |format|
       if @step.update(step_params)
         format.html { redirect_to @step, notice: 'Step was successfully updated.' }
@@ -68,7 +72,7 @@ class StepsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def load_list
-      list = List.find(params[:id])
+      @list = List.find(params[:list_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

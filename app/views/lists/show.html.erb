@@ -10,5 +10,11 @@
   <%= @list.details %>
 </p>
 
-<%= link_to 'Edit', edit_list_path(@list) %> |
+<p>
+  <%= render 'form' %>
+</p>
+
+<%= link_to 'New Step', new_list_step_path(@list) %>
+<%= link_to 'Show Steps', list_steps_path(@list) %>
+<%= link_to 'Edit', edit_list_path(@list) %>
 <%= link_to 'Back', lists_path %>
